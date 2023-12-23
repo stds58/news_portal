@@ -24,13 +24,13 @@ class Author(models.Model):
         for pc in posts_comments:
             posts_coments_rating += pc.rating
 
-        print(autor_posts_rating)
-        print('------')
-        print(autor_comments_rating)
-        print('------')
-        print(posts_coments_rating)
-        print('------')
-        print(autor_posts.query)
+        # print(autor_posts_rating)
+        # print('------')
+        # print(autor_comments_rating)
+        # print('------')
+        # print(posts_coments_rating)
+        # print('------')
+        # print(autor_posts.query)
 
         self.rating = autor_posts_rating*3 + autor_comments_rating + posts_coments_rating
         self.save()
