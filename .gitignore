@@ -1,1 +1,7 @@
+<<<<<<< HEAD
 venv/
+=======
+venv/
+idea/
+.idea/
+>>>>>>> e7399c6 (Initial commit)
