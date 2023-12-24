@@ -94,7 +94,7 @@ a1.update_rating()
 a2.update_rating()
 
 # Вывести username и рейтинг лучшего пользователя (применяя сортировку и возвращая поля первого объекта).
-'username лучшего пользователя: '+'рейтинг лучшего пользователя: '+Author.objects.order_by('-rating').values_list('user__username', flat=True).first()
+'username лучшего пользователя: '+Author.objects.order_by('-rating').values_list('user__username', flat=True).first()
 'рейтинг лучшего пользователя: '+Author.objects.order_by('-rating').first().rating
 
 # Вывести дату добавления, username автора, рейтинг, заголовок и превью лучшей статьи, основываясь на лайках/дислайках к этой статье.
