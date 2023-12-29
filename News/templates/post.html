@@ -1,0 +1,43 @@
+
+{% extends 'flatpages/default.html' %}
+ {% load censor_filters %}
+{% block title %}
+Post
+{% endblock title %}
+
+
+{% block content %}
+<!--<h1>{{ post }}</h1>-->
+
+   <h1>новость № {{ post.id }}</h1>
+   <hr>
+   {% if post.type == 'NE' %}
+       <table class="table-bordered" width="100%">
+           <tr>
+               <th>Заголовок</th>
+               <th>Дата</th>
+               <th>Новость</th>
+               <th>Рейтинг</th>
+               <th>Автор</th>
+               <th>Категория</th>
+           </tr>
+
+           <tr align="center">
+               <td width="10%">{{ post.head }}</td>
+               <td width="10%">{{ post.datetime_in|date:'d.m.Y H:i' }}</td>
+               <td width="64%">{{ post.tekst|censor }}</td>
+               <td width="6%">{{ post.rating }}</td>
+               <td width="5%">{{ post.author.user.username }}</td>
+               <td width="5%">{{ post.type }}</td>
+           </tr>
+
+
+       </table>
+   {% else %}
+       <h2>Новостёв нет!</h2>
+
+   {% endif %}
+
+
+
+{% endblock content %}

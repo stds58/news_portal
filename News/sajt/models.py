@@ -68,6 +68,14 @@ class Post(models.Model):
         self.rating -= 1
         self.save()
 
+    def avtor(self):
+        u = User.objects.filter(author__id=Post.objects.filter(author__id=self.author).values("id")[0]['id']).values("username")[0]['username']
+        return f'{u}'
+
+    #список всех новостей
+    def __str__(self):
+        return f'{self.head.title()}: {self.tekst}' #.title() делает все первые буквы в каждом слове заглавными
+
 
 class PostCategory(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

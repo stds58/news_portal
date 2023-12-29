@@ -1,0 +1,40 @@
+
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+   <h1>Все новости</h1>
+   <hr>
+   {% if posts %}
+       <table class="table-bordered" width="100%">
+           <tr>
+               <th>Заголовок</th>
+               <th>Дата</th>
+               <th>Новость</th>
+               <!-- <th>Рейтинг</th>-->
+               <!-- <th>Автор</th>-->
+               <!--<th>Категория</th>-->
+           </tr>
+           {% for post in posts %}
+           {% if post.type == 'NE' %}
+           <tr align="left">
+               <td>{{ post.head }}</td>
+               <td>{{ post.datetime_in|date:'d.m.Y H:i' }}</td>
+               <td>{{ post.tekst|truncatechars:21 }}</td>
+               <!-- <td>{{ post.rating }}</td>-->
+               <!-- <td>{{ post.author.user.username }}</td>-->
+               <!--<td>{{ post.type }}</td>-->
+           </tr>
+           {% endif %}
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>Новостёв нет!</h2>
+
+   {% endif %}
+{% endblock content %}
+
