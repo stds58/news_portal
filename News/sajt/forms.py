@@ -53,7 +53,7 @@ class ArtikullForm(forms.ModelForm):
            'author': 'Автор',
            'head': 'заголовок',
            'tekst': 'текст',
-           'category': 'тема',
+           'category': 'тема'
        }
        # widgets = {
        #     #'type': forms.HiddenInput(),
