@@ -1,0 +1,43 @@
+
+{% extends 'flatpages/default.html' %}
+ {% load censor_filters %}
+{% block title %}
+Artikull
+{% endblock title %}
+
+
+{% block content %}
+<!--<h1>{{ post }}</h1>-->
+
+   <h1>статья № {{ artikull.id }}</h1>
+   <hr>
+   {% if artikull.type == 'AR' %}
+       <table class="table-bordered" width="100%">
+           <tr>
+               <th>Заголовок</th>
+               <th>Дата</th>
+               <th>Статья</th>
+               <th>Рейтинг</th>
+               <th>Автор</th>
+               <th>Категория</th>
+           </tr>
+
+           <tr align="center">
+               <td width="10%">{{ artikull.head }}</td>
+               <td width="10%">{{ artikull.datetime_in|date:'d.m.Y H:i' }}</td>
+               <td width="64%">{{ artikull.tekst|censor }}</td>
+               <td width="6%">{{ artikull.rating }}</td>
+               <td width="5%">{{ artikull.author.user.username }}</td>
+               <td width="5%">{{ artikull.type }}</td>
+           </tr>
+
+
+       </table>
+   {% else %}
+       <h2>Статьёв нет!</h2>
+
+   {% endif %}
+
+<p><a href="/artikulls/">ко всем статьям</a></p>
+
+{% endblock content %}

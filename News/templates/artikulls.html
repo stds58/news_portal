@@ -2,42 +2,43 @@
 {% extends 'flatpages/default.html' %}
 
 {% block title %}
-News
+Artikulls
 {% endblock title %}
 
 {% block content %}
-   <h1>Все новости</h1>
-   <p><a href="/news/search/">поиск новостёв</a></p>
+   <h1>Все статьи</h1>
+   <p><a href="/artikulls/search/">поиск статьёв</a></p>
    <hr>
-   {% if posts %}
+   {% if artikulls %}
        <table class="table-bordered" width="100%">
            <tr>
                <th>Заголовок</th>
                <th>Дата</th>
-               <th>Новость</th>
+               <th>Статья</th>
                <!-- <th>Рейтинг</th>-->
-               <th>Автор</th>
-               <th>изменить новость</th>
-               <th>удалить новость</th>
+               <!-- <th>Автор</th>-->
                <!--<th>Категория</th>-->
+               <th>изменить статью</th>
+               <th>удалить статью</th>
            </tr>
-           {% for post in posts %}
+           {% for artikull in artikulls %}
            <tr align="left">
-               <td width="20%">{{ post.head }}</td>
-               <td width="10%">{{ post.datetime_in|date:'d.m.Y H:i' }}</td>
-               <td width="45%">{{ post.tekst|truncatechars:21 }}</td>
+               <td>{{ artikull.head }}</td>
+               <td>{{ artikull.datetime_in|date:'d.m.Y H:i' }}</td>
+               <td>{{ artikull.tekst|truncatechars:21 }}</td>
+               <td width="10%"><a href="/news/{{artikull.id}}/edit/">изменить</a></td>
+               <td width="10%"><a href="/news/{{artikull.id}}/delete/">удалить</a></td>
                <!-- <td>{{ post.rating }}</td>-->
-               <td width="5%">{{ post.author.user.username }}</td>
-               <td width="10%"><a href="/news/{{post.id}}/edit/">изменить</a></td>
-               <td width="10%"><a href="/news/{{post.id}}/delete/">удалить</a></td>
+               <!-- <td>{{ post.author.user.username }}</td>-->
                <!--<td>{{ post.type }}</td>-->
-           </tr>
            {% endfor %}
 
        </table>
    {% else %}
-       <h2>Новостёв нет!</h2>
+       <h2>статей нет!</h2>
+
    {% endif %}
+
    {% if page_obj.has_previous %}
        <a href="?page=1">1</a>
        {% if page_obj.previous_page_number != 1 %}
@@ -54,7 +55,7 @@ News
        {% endif %}
    {% endif %}
 
-<p><a href="/news/create/">добавить новость</a></p>
+<p><a href="/artikulls/create/">добавить статью</a></p>
 
 {% endblock content %}
 

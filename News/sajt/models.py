@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-# Create your models here.
+from django.core.validators import MinValueValidator
+from django.urls import reverse
 
 class Author(models.Model):
     rating = models.IntegerField(default = 0)
@@ -35,9 +35,15 @@ class Author(models.Model):
         self.rating = autor_posts_rating*3 + autor_comments_rating + posts_coments_rating
         self.save()
 
+    def __str__(self):
+        return f'{self.user}'
+
 
 class Category(models.Model):
     name = models.CharField(max_length = 255, unique = True)
+
+    def __str__(self):
+        return f'{self.name.title()}'
 
 
 class Post(models.Model):
@@ -49,7 +55,7 @@ class Post(models.Model):
     ]
 
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    type = models.CharField(max_length = 2, choices = POSITIONS, default=news)
+    type = models.CharField(max_length = 2, choices = POSITIONS, default=news, blank=True)
     datetime_in = models.DateTimeField(auto_now_add = True)
     head = models.CharField(max_length = 255)
     tekst = models.TextField()
@@ -71,6 +77,13 @@ class Post(models.Model):
     def avtor(self):
         u = User.objects.filter(author__id=Post.objects.filter(author__id=self.author).values("id")[0]['id']).values("username")[0]['username']
         return f'{u}'
+
+    def get_absolute_url(self):
+        if self.type == 'NE':
+            x = 'posts_detail'
+        else:
+            x = 'artikulls_detail'
+        return reverse(x, args=[str(self.id)])
 
     #список всех новостей
     def __str__(self):

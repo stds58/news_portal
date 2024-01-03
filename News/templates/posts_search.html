@@ -1,15 +1,19 @@
 
 {% extends 'flatpages/default.html' %}
-
+{% load custom_tags %}
 {% block title %}
 News
 {% endblock title %}
 
 {% block content %}
-   <h1>Все новости</h1>
-   <p><a href="/news/search/">поиск новостёв</a></p>
+   <h1>поиск новостей</h1>
+   <p><a href="/news/">обратно ко всем новостям</a></p>
+   <form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="submit" value="Найти" />
+   </form>
    <hr>
-   {% if posts %}
+   {% if posts_search %}
        <table class="table-bordered" width="100%">
            <tr>
                <th>Заголовок</th>
@@ -17,19 +21,15 @@ News
                <th>Новость</th>
                <!-- <th>Рейтинг</th>-->
                <th>Автор</th>
-               <th>изменить новость</th>
-               <th>удалить новость</th>
                <!--<th>Категория</th>-->
            </tr>
-           {% for post in posts %}
+           {% for post in posts_search %}
            <tr align="left">
                <td width="20%">{{ post.head }}</td>
                <td width="10%">{{ post.datetime_in|date:'d.m.Y H:i' }}</td>
-               <td width="45%">{{ post.tekst|truncatechars:21 }}</td>
+               <td width="60%">{{ post.tekst|truncatechars:21 }}</td>
                <!-- <td>{{ post.rating }}</td>-->
-               <td width="5%">{{ post.author.user.username }}</td>
-               <td width="10%"><a href="/news/{{post.id}}/edit/">изменить</a></td>
-               <td width="10%"><a href="/news/{{post.id}}/delete/">удалить</a></td>
+               <td width="10%">{{ post.author.user.username }}</td>
                <!--<td>{{ post.type }}</td>-->
            </tr>
            {% endfor %}
@@ -37,24 +37,23 @@ News
        </table>
    {% else %}
        <h2>Новостёв нет!</h2>
+
    {% endif %}
+
    {% if page_obj.has_previous %}
-       <a href="?page=1">1</a>
+       <a href="?{% url_replace page=1 %}">1</a>
        {% if page_obj.previous_page_number != 1 %}
            ...
-           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
        {% endif %}
    {% endif %}
    {{ page_obj.number }}
    {% if page_obj.has_next %}
-       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
        {% if paginator.num_pages != page_obj.next_page_number %}
            ...
-           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+           <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
        {% endif %}
    {% endif %}
 
-<p><a href="/news/create/">добавить новость</a></p>
-
 {% endblock content %}
-
