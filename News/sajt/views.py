@@ -1,5 +1,5 @@
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Author, User
 from datetime import datetime
@@ -79,6 +79,14 @@ class PostCreate(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        author = Author.objects.filter(user_id = self.request.user).values('id')
+        author_id = author.values_list('id')[0][0]
+        post.author_id = author_id
+        post.save()
+        return super().form_valid(form)
 
 
 class PostUpdate(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
