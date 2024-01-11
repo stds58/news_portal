@@ -121,10 +121,7 @@ class ArtikullDelete(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('posts_list')
 
 
-# def get_autor(request):
-#     user = request.user
-#     avtor = Author.objects.filter(user = user)
-#     return avtor
+
 
 
 

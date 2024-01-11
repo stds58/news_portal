@@ -2,14 +2,14 @@ from django import forms
 from .models import Post, Author, User
 from django.core.exceptions import ValidationError
 
-class PostForm(forms.ModelForm):
 
-   #author = forms.CharField(initial=get_autor, widget=forms.TextInput(attrs={'disabled': False}),label='автор')
+class PostForm(forms.ModelForm):
+   #author = forms.CharField(initial='', widget=forms.TextInput(attrs={'disabled': False}),label='автор')
 
    class Meta:
        model = Post
        fields = [
-           #'author',
+           'author',
            #'type',
            #'datetime_in', django.core.exceptions.FieldError: 'datetime_in' cannot be specified for Post model form as it is a non-editable field
            'head',
