@@ -1,5 +1,4 @@
 from django.db import models
-#from sajt.models import Author, Category
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
 from django import forms
@@ -27,7 +26,6 @@ class BasicSignupForm(SignupForm):
         user = super(BasicSignupForm, self).save(request)
         basic_group = Group.objects.get(name='common')
         basic_group.user_set.add(user)
-        #a1 = Author.objects.create(user = user)
         return user
 
 
