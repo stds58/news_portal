@@ -3,6 +3,8 @@ from .models import Post, Author, User
 from django.core.exceptions import ValidationError
 
 class PostForm(forms.ModelForm):
+   #author = forms.CharField(initial=8, widget=forms.TextInput(attrs={'disabled': False}),label='автор')
+
    class Meta:
        model = Post
        fields = [

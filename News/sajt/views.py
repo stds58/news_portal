@@ -7,6 +7,7 @@ from .filters import PostFilter
 from .forms import PostForm, ArtikullForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 class PostsList(ListView):
     model = Post
@@ -73,25 +74,29 @@ class ArtikullsDetail(DetailView):
     context_object_name = 'artikull'
 
 
-class PostCreate(CreateView):
+class PostCreate(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('sajt.add_post',)
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
 
 
-class PostUpdate(UpdateView):
+class PostUpdate(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('sajt.change_post',)
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
 
 
-class PostDelete(DeleteView):
+class PostDelete(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    permission_required = ('sajt.delete_post',)
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('posts_list')
 
 
-class ArtikullCreate(CreateView):
+class ArtikullCreate(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('sajt.add_post',)
     form_class = ArtikullForm
     model = Post
     template_name = 'post_edit.html'
@@ -102,13 +107,15 @@ class ArtikullCreate(CreateView):
         post.save()
         return super().form_valid(form)
 
-class ArtikullUpdate(UpdateView):
+class ArtikullUpdate(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('sajt.change_post',)
     form_class = ArtikullForm
     model = Post
     template_name = 'post_edit.html'
 
 
-class ArtikullDelete(DeleteView):
+class ArtikullDelete(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    permission_required = ('sajt.delete_post',)
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('posts_list')
