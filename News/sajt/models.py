@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 from django.urls import reverse
+from datetime import datetime
+
 
 class Author(models.Model):
     rating = models.IntegerField(default = 0)
@@ -41,6 +43,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length = 255, unique = True)
+    subscribers = models.ManyToManyField(User, blank = True, null = True, related_name= 'caregories')
 
     def __str__(self):
         return f'{self.name.title()}'
@@ -108,6 +111,8 @@ class Comment(models.Model):
     def dislike(self):
         self.rating -= 1
         self.save()
+
+
 
 
 

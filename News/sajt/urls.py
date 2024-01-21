@@ -4,7 +4,7 @@ from .views import (
    ArtikullsList, ArtikullsDetail,
    PostsListSearch, ArtikullsListSearch,
    PostCreate, PostUpdate, PostDelete,
-   ArtikullCreate, ArtikullUpdate, ArtikullDelete
+   ArtikullCreate, ArtikullUpdate, ArtikullDelete, CategoryList, subscribe, unsubscribe
 )
 
 urlpatterns = [
@@ -21,6 +21,9 @@ urlpatterns = [
    path('artikulls/create/', ArtikullCreate.as_view(), name='artikull_create'),
    path('artikulls/<int:pk>/edit/', ArtikullUpdate.as_view(), name='artikull_update'),
    path('artikulls/<int:pk>/delete/', ArtikullDelete.as_view(), name='artikull_delete'),
+   path('categories/<int:pk>/', CategoryList.as_view(), name='category_list'),
+   path('categories/<int:pk>/subscribe/', subscribe, name='subscribe'),
+   path('categories/<int:pk>/unsubscribe/', unsubscribe, name='unsubscribe'),
 
 ]
 

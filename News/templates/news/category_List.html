@@ -7,9 +7,9 @@ News
 
 {% block content %}
    <h1>Все новости</h1>
-   <p><a href="/news/search/">поиск новостёв</a></p>
+   <p><a href="/news/">обратно ко всем новостям</a></p>
    <hr>
-   {% if posts %}
+   {% if category_news_list %}
        <table class="table-bordered" width="100%">
            <tr>
                <th>Заголовок</th>
@@ -17,24 +17,25 @@ News
                <th>Новость</th>
                <!-- <th>Рейтинг</th>-->
                <th>Автор</th>
-               <th>изменить новость</th>
-               <th>удалить новость</th>
+               <!-- <th>изменить новость</th>-->
+               <!-- <th>удалить новость</th>-->
                <th>Категория</th>
            </tr>
-           {% for post in posts %}
+           {% for post in category_news_list %}
            <tr align="left">
                <td width="20%">{{ post.head }}</td>
                <td width="10%">{{ post.datetime_in|date:'d.m.Y H:i' }}</td>
-               <td width="25%">{{ post.tekst|truncatechars:21 }}</td>
+               <td width="45%">{{ post.tekst|truncatechars:21 }}</td>
                <!-- <td>{{ post.rating }}</td>-->
                <td width="5%">{{ post.author.user.username }}</td>
-               <td width="10%"><a href="/news/{{post.id}}/edit/">изменить</a></td>
-               <td width="10%"><a href="/news/{{post.id}}/delete/">удалить</a></td>
-               <!--<td>{{ post.type }}</td>-->
+               <!-- <td width="10%"><a href="/news/{{post.id}}/edit/">изменить</a></td>-->
+               <!-- <td width="10%"><a href="/news/{{post.id}}/delete/">удалить</a></td>-->
+               <!-- <td width="20%">{{ post.type }}</td>-->
                <td width="20%">
                    {% for category in post.category.all %}
                     <a href="{% url 'category_list' category.id %}">{{ category }}</a>
                    {% endfor %}
+               </td>
            </tr>
            {% endfor %}
 
@@ -42,6 +43,7 @@ News
    {% else %}
        <h2>Новостёв нет!</h2>
    {% endif %}
+
    {% if page_obj.has_previous %}
        <a href="?page=1">1</a>
        {% if page_obj.previous_page_number != 1 %}
@@ -59,6 +61,13 @@ News
    {% endif %}
 
 <p><a href="/news/create/">добавить новость</a></p>
+<br>
+{% if is_not_subscriber %}
+<button type="button"><a href="{% url 'category_list' category.id %}subscribe/" class = "btn btn-secondary btn-sm">подписаться на рассылку данной категории новостей</a></button>
+{% elif not is_not_subscriber %}
+<button type="button"><a href="{% url 'category_list' category.id %}unsubscribe/" class = "btn btn-secondary btn-sm">отписаться от рассылки данной категории новостей</a></button>
+{% endif %}
+<br>
 
 {% endblock content %}
 
