@@ -24,8 +24,8 @@ def send_notifications(preview, pk, head, subscribers):
     )
 
     msg.attach_alternative(html_content, 'text/html')
-    res = msg.send()
-    rassilka_srazu.delay(res)
+    #print(msg.subject,msg.body,msg.from_email,msg.to)
+    rassilka_srazu.delay(msg.subject,msg.body,msg.from_email,msg.to,html_content)
     #msg.send()
 
 @receiver(m2m_changed, sender=PostCategory)
