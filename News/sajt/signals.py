@@ -4,6 +4,7 @@ from .models import PostCategory
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
+from .task import rassilka_srazu
 
 
 def send_notifications(preview, pk, head, subscribers):
@@ -23,7 +24,9 @@ def send_notifications(preview, pk, head, subscribers):
     )
 
     msg.attach_alternative(html_content, 'text/html')
-    msg.send()
+    res = msg.send()
+    rassilka_srazu.delay(res)
+    #msg.send()
 
 @receiver(m2m_changed, sender=PostCategory)
 def notify_about_new_post(sender, instance, **kwargs):
@@ -36,3 +39,6 @@ def notify_about_new_post(sender, instance, **kwargs):
             subscribers_emails += [s.email for s in subscribers]
 
         send_notifications(instance.preview(), instance.pk, instance.head, subscribers_emails)
+
+
+

@@ -91,6 +91,7 @@ class PostCreate(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+
 class PostUpdate(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     permission_required = ('sajt.change_post',)
     form_class = PostForm
