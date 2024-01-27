@@ -58,8 +58,8 @@ def rassilka_nedela():
             if user_is_author:
                 postses = posts
                 postses = postses.exclude(author=user.author)
-                posts_ = set(posts)
-            if postses:
+                posts_ = set(postses)
+            if posts_:
                 html_content = render_to_string(
                     'daily_post.html',
                     {
