@@ -22,8 +22,8 @@ News
                <th>Категория</th>
            </tr>
            {% for post in posts %}
-           <tr align="left">
-               <td width="20%">{{ post.head }}</td>
+           <tr align="left" class="{% cycle 'xxblue' 'xxwhite' %}">
+               <td width="20%" >{{ post.head }}</td>
                <td width="10%">{{ post.datetime_in|date:'d.m.Y H:i' }}</td>
                <td width="25%">{{ post.tekst|truncatechars:21 }}</td>
                <!-- <td>{{ post.rating }}</td>-->
