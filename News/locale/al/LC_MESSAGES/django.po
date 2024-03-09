@@ -22,5 +22,5 @@ msgid "Advanced options"
 msgstr ""
 
 #: .\sajt\views.py:25
-msgid "Все новости"
+msgid "te gjitha lajmet"
 msgstr "LAJMET"
