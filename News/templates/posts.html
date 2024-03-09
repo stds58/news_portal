@@ -1,12 +1,12 @@
 
 {% extends 'flatpages/default.html' %}
-
+{% load i18n %}
 {% block title %}
 News
 {% endblock title %}
 
 {% block content %}
-   <h1>Все новости</h1>
+   <h1>{% trans "te gjitha lajmet" noop %}</h1>
    <p><a href="/news/search/">поиск новостёв</a></p>
    <hr>
    {% if posts %}

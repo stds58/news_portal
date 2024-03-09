@@ -21,10 +21,10 @@ class PostsList(ListView):
     context_object_name = 'posts'
     paginate_by = 10
 
-    def get(self, request):
-        string = _('Все новости')
-
-        return HttpResponse(string)
+    # def get(self, request):
+    #     string = _('Все новости')
+    #     context = {'string': string}
+    #     return HttpResponse(render(request,'posts.html',context))
 
 
 class PostsListSearch(ListView):
