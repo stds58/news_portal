@@ -9,6 +9,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import gettext as _
+from django.http import HttpResponse
 
 
 class PostsList(ListView):
@@ -18,6 +20,11 @@ class PostsList(ListView):
     template_name = 'posts.html'
     context_object_name = 'posts'
     paginate_by = 10
+
+    def get(self, request):
+        string = _('Все новости')
+
+        return HttpResponse(string)
 
 
 class PostsListSearch(ListView):
@@ -167,6 +174,10 @@ def unsubscribe(request, pk):
 
     message = 'вы отписались от рассылки новостей категории '
     return render(request, 'news/unsubscribe.html', {'category': category, 'message': message})
+
+
+
+
 
 
 

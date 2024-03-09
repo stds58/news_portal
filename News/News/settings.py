@@ -62,9 +62,14 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale')
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -73,7 +78,9 @@ MIDDLEWARE = [
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
+
 ROOT_URLCONF = 'News.urls'
+
 
 TEMPLATES = [
     {
@@ -136,7 +143,8 @@ AUTHENTICATION_BACKENDS = [
 # TIME_ZONE = 'UTC'
 # USE_I18N = True
 # USE_TZ = True
-LANGUAGE_CODE = 'ru-RU'
+# = 'sq'
+#LANGUAGE_CODE = 'ru-RU'
 TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_L10N = True
