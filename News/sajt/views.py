@@ -26,12 +26,12 @@ class PostsList(ListView):
     #     context = {'string': string}
     #     return HttpResponse(render(request,'posts.html',context))
 
-    def get(self, request):
-        models = Post.objects.all()
-        context = {
-            'models': models,
-        }
-        return HttpResponse(render(request,'posts.html',context))
+    # def get(self, request):
+    #     models = Post.objects.all()
+    #     context = {
+    #         'models': models,
+    #     }
+    #     return HttpResponse(render(request,'posts.html',context))
 
 
 

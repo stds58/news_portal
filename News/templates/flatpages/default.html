@@ -62,12 +62,8 @@
    <div class="row">
        <div class="col-lg-12 text-center">
            {% block content %}
-           <!-- {{ flatpage.content }}-->
-           {% for model in models %}
-    <div class="model-class">
-        {{ model.name }}
-    </div>
-    {% endfor %}
+           {{ flatpage.content }}
+
            {% endblock content %}
        </div>
    </div>
