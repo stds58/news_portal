@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-09 20:00+0300\n"
+"POT-Creation-Date: 2024-03-09 21:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,10 @@ msgstr ""
 #: .\templates\posts.html:9
 msgid "te gjitha lajmet"
 msgstr "Все новости"
+
+#: .\templates\posts.html:17
+msgid "lajme"
+msgstr ""
 
 #~ msgid "Все новости"
 #~ msgstr "te gjitha lajmet"
